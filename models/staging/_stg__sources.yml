@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: raw
     description: "Bronze layer — source-system tables"
-    database: rideshare-analytics-497407
+    database: project-b8fc8724-8adc-4499-9a4
     schema: raw
     loaded_at_field: _loaded_at
     freshness:

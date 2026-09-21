@@ -13,3 +13,4 @@ select
     sum(final_fare)                                       as gmv_inr
 from {{ ref('int_trip_enriched') }}
 group by 1, 2, 3, 4, 5
+
