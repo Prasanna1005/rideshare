@@ -1,4 +1,3 @@
-```yaml
 version: 2
 
 models:
@@ -137,4 +136,4 @@ exposures:
     owner:
       name: MSc Capstone
       email: msc.student@example.com
-```
+
