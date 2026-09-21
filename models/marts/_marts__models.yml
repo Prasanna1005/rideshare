@@ -6,6 +6,7 @@ models:
     columns:
       - name: date_sk
         data_tests: [not_null, unique]
+
       - name: date_day
         data_tests: [not_null, unique]
 
@@ -13,6 +14,7 @@ models:
     columns:
       - name: city_sk
         data_tests: [not_null, unique]
+
       - name: city_business_key
         data_tests: [not_null]
 
@@ -20,6 +22,7 @@ models:
     columns:
       - name: driver_sk
         data_tests: [not_null, unique]
+
       - name: driver_business_key
         data_tests: [not_null]
 
@@ -27,6 +30,7 @@ models:
     columns:
       - name: rider_sk
         data_tests: [not_null, unique]
+
       - name: rider_business_key
         data_tests: [not_null]
 
@@ -35,32 +39,48 @@ models:
     columns:
       - name: trip_id
         data_tests: [not_null, unique]
+
       - name: driver_business_key
         data_tests:
           - not_null
-          - relationships: { to: ref('dim_driver_scd2'), field: driver_business_key }
+          - relationships:
+              arguments:
+                to: ref('dim_driver_scd2')
+                field: driver_business_key
+
       - name: rider_business_key
         data_tests:
           - not_null
-          - relationships: { to: ref('dim_rider_scd2'), field: rider_business_key }
+          - relationships:
+              arguments:
+                to: ref('dim_rider_scd2')
+                field: rider_business_key
+
       - name: surge_multiplier
         data_tests:
-          - dbt_utils.expression_is_true: { expression: ">= 1.0" }
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 1.0"
 
   - name: fct_payments
     columns:
       - name: payment_id
         data_tests: [not_null]
+
       - name: trip_id
         data_tests:
           - not_null
-          - relationships: { to: ref('fct_trips'), field: trip_id }
+          - relationships:
+              arguments:
+                to: ref('fct_trips')
+                field: trip_id
 
   - name: fct_driver_pings_hourly_baseline
     description: "BASELINE for the empirical study — incremental, refreshed on Airflow schedule"
     columns:
       - name: driver_id
         data_tests: [not_null]
+
       - name: ping_hour
         data_tests: [not_null]
 
@@ -78,13 +98,17 @@ models:
 
   # ---- finance ----
   - name: mart_revenue_per_city_daily
+
   - name: mart_rider_30day_churn
     columns:
       - name: rider_id
         data_tests: [not_null, unique]
+
       - name: activity_band
         data_tests:
-          - accepted_values: { values: ['never_rode','active','recent','lapsing','churned'] }
+          - accepted_values:
+              arguments:
+                values: ['never_rode', 'active', 'recent', 'lapsing', 'churned']
 
   # ---- executive ----
   - name: mart_executive_kpi_weekly
@@ -112,3 +136,4 @@ exposures:
     owner:
       name: MSc Capstone
       email: msc.student@example.com
+
