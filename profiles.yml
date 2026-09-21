@@ -1,0 +1,13 @@
+rideshare_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: project-b8fc8724-8adc-4499-9a4
+      dataset: BQ_DBTCLOUD
+      keyfile: C:\Users\Sushanth\BQ Project_1_Bundle\BQ Project-1\Project_1_Codebase\rideshare_analytics\Credentials\project-b8fc8724-8adc-4499-9a4-6e95eef01b43.json
+      location: US
+      timeout_seconds: 300
+      threads: 4
+
